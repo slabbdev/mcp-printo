@@ -1,0 +1,12 @@
+name = "slabb-leaddev-mcp"
+main = "worker/worker.js"
+compatibility_date = "2025-09-01"
+
+# Route sur la zone Cloudflare de slabb.dev — créée automatiquement par
+# `wrangler deploy` si la zone slabb.dev est sur le compte Cloudflare utilisé.
+# Si la zone est ailleurs : supprimer `routes` et déployer sur workers.dev,
+# puis CNAME mcp-printo.slabb.dev → slabb-leaddev-mcp.<sous-domaine>.workers.dev
+# (le Worker servira alors tout le hostname ; la vitrine reste sur GitHub Pages).
+routes = [
+  { pattern = "mcp-printo.slabb.dev/mcp*", zone_name = "slabb.dev" }
+]

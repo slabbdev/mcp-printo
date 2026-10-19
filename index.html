@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sam Labbe — candidature hors délai, exposée en MCP (PrintOclock Lead Dev)</title>
+<meta name="description" content="Dossier de candidature au poste Lead Dev Symfony/Sylius de PrintOclock, exposé en MCP. Le portail a fermé le 10/10 — le dossier est resté prêt, scellé et vérifiable.">
+<style>
+  :root { --bg:#0d1117; --panel:#161b22; --line:#30363d; --fg:#e6edf3; --dim:#8b949e; --acc:#4ec9a4; --warn:#e3b341; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.6 -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width:860px; margin:0 auto; padding:48px 20px 80px; }
+  h1 { font-size:1.7rem; line-height:1.3; margin:0 0 8px; }
+  h2 { font-size:1.15rem; margin:48px 0 12px; padding-bottom:6px; border-bottom:1px solid var(--line); }
+  .sub { color:var(--dim); margin:0 0 24px; }
+  .tag { display:inline-block; background:var(--panel); border:1px solid var(--line); border-radius:99px; padding:2px 12px; font-size:.8rem; color:var(--dim); margin:0 6px 8px 0; }
+  pre { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:14px 16px; overflow-x:auto; font-size:.85rem; line-height:1.5; }
+  code { font-family:"SF Mono", ui-monospace, Menlo, Consolas, monospace; }
+  p code, li code { background:var(--panel); border:1px solid var(--line); border-radius:4px; padding:1px 6px; font-size:.85em; }
+  table { width:100%; border-collapse:collapse; font-size:.92rem; }
+  th, td { text-align:left; padding:8px 10px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { color:var(--dim); font-weight:600; }
+  td:first-child { white-space:nowrap; }
+  blockquote { margin:16px 0; padding:12px 18px; border-left:3px solid var(--acc); background:var(--panel); border-radius:0 8px 8px 0; }
+  .stamp { border:1px dashed var(--warn); border-radius:8px; padding:14px 18px; margin:20px 0; color:var(--warn); font-size:.92rem; }
+  a { color:var(--acc); text-decoration:none; }
+  a:hover { text-decoration:underline; }
+  footer { margin-top:56px; color:var(--dim); font-size:.85rem; border-top:1px solid var(--line); padding-top:18px; }
+</style>
+</head>
+<body>
+<main>
+
+<h1>Sam Labbe — lead dev Symfony, candidature exposée en MCP</h1>
+<p class="sub">Poste visé : Lead Dev Symfony / Sylius, PrintOclock (Toulouse / full remote France) · CTO-recruteur, équipe 2-5 devs, agentic engineering.</p>
+<p>
+  <span class="tag">PHP/Symfony depuis 2004</span>
+  <span class="tag">lead depuis 2019</span>
+  <span class="tag">PRs Sylius réelles (Alma)</span>
+  <span class="tag">agents en production chez moi</span>
+  <span class="tag">full remote — Vosges</span>
+</p>
+
+<div class="stamp">⚠️ Transparence totale : le portail MCP de PrintOclock a fermé le <strong>10 octobre 2026 à 20h10</strong>. J'ai découvert l'annonce le 19. Mon agent a fait le parcours quand même — offre archivée, preuve calculée sur vecteur de test, payload <code>submit_application</code> préparé puis <strong>retenu</strong>. On ne force pas une porte fermée. Le dossier est ici, scellé et vérifiable.</div>
+
+<h2>Brancher votre agent</h2>
+<pre><code>{
+  "mcpServers": {
+    "slabb-leaddev": { "type": "http", "url": "https://mcp-printo.slabb.dev/mcp" }
+  }
+}</code></pre>
+<p>Ou en une ligne, sans client MCP :</p>
+<pre><code>curl -s -X POST https://mcp-printo.slabb.dev/mcp \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json, text/event-stream' \
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'</code></pre>
+<p>Serveur en lecture seule : il ne collecte rien, ne dépose aucun cookie, ne soumet rien nulle part.</p>
+
+<h2>Les 6 outils</h2>
+<table>
+  <tr><th>Outil</th><th>Contenu</th></tr>
+  <tr><td><code>get_profile</code></td><td>Profil taillé pour l'offre — répond critère par critère aux 4 points de l'annonce.</td></tr>
+  <tr><td><code>get_sylius_proof</code></td><td>PRs publiques sur <code>alma/sylius-2</code> (#4) et <code>alma/alma-woocommerce-gateway</code> (#692, #693), reviewées par des ingés Alma, retours traités le jour même.</td></tr>
+  <tr><td><code>get_story</code></td><td>La story en 5 lignes demandée par le portail — ce qui a marché, ce qui a foiré.</td></tr>
+  <tr><td><code>get_agentic_flow</code></td><td>Grisematter : cerveau d'agent signé Ed25519, vivant 1 h/jour en CI. Plus navette et NoireBox.</td></tr>
+  <tr><td><code>get_missed_deadline_receipt</code></td><td>Chronologie horodatée du hors-délai, archive verbatim de <code>get_offer</code>, payload retenu.</td></tr>
+  <tr><td><code>verify_receipt</code></td><td>Les commandes <code>shasum</code> exactes pour revérifier la chaîne de hash chez vous, sans nous faire confiance.</td></tr>
+</table>
+
+<h2>La story (5 lignes)</h2>
+<blockquote>
+  Dev depuis 2004, pro depuis 2009, lead depuis 2019. Créneau loupé : annonce trouvée 9 jours après la fermeture — affaire pas lâchée, mon agent a fait le parcours quand même, ce dossier MCP est la preuve.<br>
+  Plus dur défi Symfony + agentique : 4 sessions d'agents sur le même repo sans s'écraser — registre de publication partagé, re-check <code>git status</code> avant action publique.<br>
+  A marché : PRs réelles sur <code>alma/sylius-2</code> portées par agents, review d'un ingé Alma, retours traités le jour même.<br>
+  A foiré : deux sessions ont publié le même bug en doublon le même soir.<br>
+  Depuis : intention marquée avant publication ; je mesure délai de PR et rework ; je scelle mes journaux en chaînes de hash. Ah et j'ai annoncé McDo à mes gosses et ma femme vu que j'avais le job — (je n'ai ni l'un ni l'autre, précision).
+</blockquote>
+
+<h2>Le receipt (hors délai assumé)</h2>
+<table>
+  <tr><th>Quand (UTC)</th><th>Quoi</th></tr>
+  <tr><td>2026-10-10 20:10 CEST</td><td>Le portail MCP PrintOclock ferme (date officielle relue via <code>get_offer</code>).</td></tr>
+  <tr><td>2026-10-19 17:07:25</td><td>Première connexion de mon agent : <code>initialize</code> OK, <code>tools/list</code> OK. Portail déjà fermé.</td></tr>
+  <tr><td>2026-10-19 17:56:27</td><td><code>get_offer</code> ré-archive mot pour mot (3 095 octets, dans le repo public). Aucun <code>offer_token</code> délivré.</td></tr>
+  <tr><td>à la suite</td><td>Preuve « proof » validée sur vecteur de test ; payload <code>submit_application</code> préparé puis retenu.</td></tr>
+</table>
+<pre><code>h_get_offer = 98fbb3849811c3aa2f00e7a75b1f0d5abc6f4c2cf43ca8bfbbd42ffa515ff25e
+h_payload   = e6a0005d070fa5df81c58469cbd7d6dbcc98c662a3b5461957f9cb95ac0f3df8
+h_chain     = sha256(h_get_offer ‖ h_payload) = 05afbdc005d70e7dea436d14711a5acf796902234173166ff4e8f56342b83305</code></pre>
+<p>Recalcul : outil <code>verify_receipt</code> du MCP, ou directement dans <a href="https://github.com/slabbdev/mcp-printo">le repo</a> (dossier <code>archive/</code>).</p>
+
+<footer>
+  Sam Labbe · <a href="https://slabb.dev">slabb.dev</a> · <a href="https://github.com/slabbdev">github.com/slabbdev</a> ·
+  <a href="https://github.com/slabbdev/grisematter">grisematter</a> ·
+  <a href="https://github.com/noirebox/noirebox">noirebox</a> ·
+  github@slabb.dev
+</footer>
+
+</main>
+</body>
+</html>

@@ -1,0 +1,10 @@
+{
+  "name": "mcp-printo",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "selftest": "node tools/selftest.mjs",
+    "dev": "node tools/local-server.mjs",
+    "deploy": "wrangler deploy"
+  }
+}
