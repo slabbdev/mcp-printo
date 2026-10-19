@@ -29,7 +29,6 @@ Dossier de candidature au poste **Lead Dev Symfony / Sylius** de PrintOclock (fe
 | `tools/selftest.mjs` | 20 checks du router en node local |
 | `tools/selftest-curl.sh` | Preuve live post-déploiement (curl contre l'URL publique) — 12 checks |
 | `tools/local-server.mjs` | Serveur HTTP local qui embarque le Worker (test de bout en bout sans déployer) |
-| `EMAIL.md` | Brouillon de l'email au CTO (à n'envoyer qu'après la mise en ligne) |
 | `CNAME` | Domaine custom Pages : `mcp-printo.slabb.dev` |
 
 ## Chaîne de hash (scellée le 2026-10-19)
@@ -50,7 +49,7 @@ h_chain     = sha256(h_get_offer ‖ h_payload) = 05afbdc005d70e7dea436d14711a5a
 4. **DNS (à Sam, chez Spaceship)** : `mcp-printo` CNAME `slabbdev.github.io` → la vitrine passe en https://mcp-printo.slabb.dev/ (cert GitHub auto).
 5. ~~Worker~~ ✅ déployé par API CF : `https://slabb-leaddev-mcp.slabbdev.workers.dev/mcp`.
 6. ~~Preuve live~~ ✅ 12/12 PASS contre l'URL publique.
-7. **Email** : envoyer `EMAIL.md` à jlestel@printoclock.com (après étape 4).
+7. **Email** : brouillon conservé hors repo (local uniquement) — envoi à jlestel@printoclock.com une fois la vitrine et le MCP prouvés live.
 
 ## Test local
 
