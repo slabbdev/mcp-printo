@@ -46,11 +46,11 @@
 <h2>Brancher votre agent</h2>
 <pre><code>{
   "mcpServers": {
-    "slabb-leaddev": { "type": "http", "url": "https://mcp-printo.slabb.dev/mcp" }
+    "slabb-leaddev": { "type": "http", "url": "https://slabb-leaddev-mcp.slabbdev.workers.dev/mcp" }
   }
 }</code></pre>
 <p>Ou en une ligne, sans client MCP :</p>
-<pre><code>curl -s -X POST https://mcp-printo.slabb.dev/mcp \
+<pre><code>curl -s -X POST https://slabb-leaddev-mcp.slabbdev.workers.dev/mcp \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json, text/event-stream' \
   -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'</code></pre>

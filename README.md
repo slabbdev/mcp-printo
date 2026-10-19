@@ -5,17 +5,17 @@ Dossier de candidature au poste **Lead Dev Symfony / Sylius** de PrintOclock (fe
 ## Architecture (zéro serveur)
 
 ```
-                    mcp-printo.slabb.dev
-                    (zone Cloudflare de slabb.dev, proxy orange)
-                   /                                  \
-   mcp-printo.slabb.dev/mcp*                 mcp-printo.slabb.dev/*
-   → Worker Cloudflare (gratuit)             → GitHub Pages (ce repo, index.html)
-     JSON-RPC stateless, lecture seule         vitrine humaine
+  https://slabb-leaddev-mcp.slabbdev.workers.dev/mcp      https://mcp-printo.slabb.dev/
+  → Worker Cloudflare (JSON-RPC stateless, lecture seule)  → GitHub Pages (ce repo, index.html)
+    déployé par API CF (compte slabbdev.workers.dev)         vitrine humaine (DNS Spaceship :
+                                                             mcp-printo CNAME slabbdev.github.io)
 ```
 
 - Le contenu vit **dans ce repo** (source de vérité + GitHub Pages).
 - Le Worker ne fait que router le JSON-RPC : aucune donnée, aucune base, rien à maintenir.
-- Pages seul ne peut pas servir de MCP (GET only ; le transport streamable HTTP exige du POST).
+- La zone `slabb.dev` est chez Spaceship (pas Cloudflare) → pas de route `mcp-printo.slabb.dev/mcp*`
+  possible ; le MCP vit sur workers.dev. Pages seul ne peut pas servir de MCP
+  (GET only ; le transport streamable HTTP exige du POST).
 
 ## Contenu
 
@@ -23,7 +23,7 @@ Dossier de candidature au poste **Lead Dev Symfony / Sylius** de PrintOclock (fe
 |---|---|
 | `index.html` | Vitrine humaine (GitHub Pages, racine) |
 | `worker/worker.js` | Router MCP (6 outils, stateless, lecture seule) |
-| `worker/wrangler.toml` | Config Worker + route `mcp-printo.slabb.dev/mcp*` |
+| `worker/wrangler.toml` | Config Worker (nom, module, compat date) |
 | `archive/get_offer_response_2026-10-19T17:56:27Z.json` | Réponse `get_offer` verbatim (3 095 octets) |
 | `archive/submit_application_prepared.json` | Payload `submit_application` préparé puis retenu |
 | `tools/selftest.mjs` | 20 checks du router en node local |
@@ -42,15 +42,15 @@ h_chain     = sha256(h_get_offer ‖ h_payload) = 05afbdc005d70e7dea436d14711a5a
 
 ⚠️ **Tout fichier modifié dans `archive/` casse la chaîne** — les constantes du Worker et de la vitrine ne correspondraient plus (le selftest le détecte).
 
-## Runbook de mise en ligne (ordre obligatoire)
+## Runbook (état au 2026-10-19)
 
-1. **Local** : `node tools/selftest.mjs` → 20/20 PASS.
-2. **Push** du repo sur `slabbdev/mcp-printo` (public).
-3. **GitHub Pages** : Settings → Pages → Deploy from branch `main` / racine → domaine custom `mcp-printo.slabb.dev` (le fichier `CNAME` est déjà là).
-4. **DNS (à Sam)** : dans la zone `slabb.dev` → enregistrement `CNAME mcp-printo → slabbdev.github.io`, **proxy orange activé**, SSL/TLS en `Full`. (Prérequis : zone `slabb.dev` sur Cloudflare. Sinon, fallback : supprimer `routes` du `wrangler.toml`, déployer sur `workers.dev`, et mettre à jour l'URL dans la vitrine + l'email.)
-5. **Worker** : `wrangler login && wrangler deploy` (la route est créée automatiquement), ou laisser la GitHub Action (`secrets`: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`).
-6. **Preuve live** : `bash tools/selftest-curl.sh https://mcp-printo.slabb.dev/mcp` → 12/12 PASS **avant** d'envoyer le moindre email.
-7. **Email** : envoyer `EMAIL.md` à jlestel@printoclock.com.
+1. ~~Local~~ ✅ 20/20 PASS (`node tools/selftest.mjs`).
+2. ~~Push~~ ✅ repo public `slabbdev/mcp-printo`.
+3. ~~GitHub Pages~~ ✅ activé, cname `mcp-printo.slabb.dev` posé côté repo.
+4. **DNS (à Sam, chez Spaceship)** : `mcp-printo` CNAME `slabbdev.github.io` → la vitrine passe en https://mcp-printo.slabb.dev/ (cert GitHub auto).
+5. ~~Worker~~ ✅ déployé par API CF : `https://slabb-leaddev-mcp.slabbdev.workers.dev/mcp`.
+6. ~~Preuve live~~ ✅ 12/12 PASS contre l'URL publique.
+7. **Email** : envoyer `EMAIL.md` à jlestel@printoclock.com (après étape 4).
 
 ## Test local
 
